@@ -5,6 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Month End Coin Target Alert</title>
     <style>
+        /* Embedded Fonts */
+        /* Poppins */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 300;
+            src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfedw.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 700;
+            src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 800;
+            src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLDD4Z1xlFQ.woff2) format('woff2');
+        }
+        
+        /* Open Sans */
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVc.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 500;
+            src: url(https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjr0B4gaVc.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 600;
+            src: url(https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsgH1x4gaVc.woff2) format('woff2');
+        }
+        
+        /* Orbitron */
+        @font-face {
+            font-family: 'Orbitron';
+            font-style: normal;
+            font-weight: 500;
+            src: url(https://fonts.gstatic.com/s/orbitron/v25/yMJMMIlzdpvBhQQL_SC3X9yhF25-T1nyxSmxpg.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Orbitron';
+            font-style: normal;
+            font-weight: 600;
+            src: url(https://fonts.gstatic.com/s/orbitron/v25/yMJMMIlzdpvBhQQL_SC3X9yhF25-T1n6Smxpg.woff2) format('woff2');
+        }
+
+        /* CSS Variables */
         :root {
             --primary: #4361EE;
             --secondary: #3A0CA3;
@@ -17,8 +91,7 @@
             --purple: #7209B7;
         }
         
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
-        
+        /* Base Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -133,12 +206,17 @@
             padding: 18px;
             border-radius: 12px;
             margin: 0 auto 25px auto;
-            line-height: 1.6;
+            line-height: 1.7;
             border-left: 4px solid var(--primary);
             border-right: 4px solid var(--primary);
+            font-family: 'Open Sans', sans-serif;
             font-size: 15px;
+            font-weight: 500;
+            color: #2D3748;
+            letter-spacing: 0.2px;
             max-width: 90%;
             position: relative;
+            text-align: left;
         }
         
         .agency {
@@ -165,7 +243,7 @@
         }
         
         .countdown-title {
-            font-size: 12px; /* Reduced from 14px */
+            font-size: 12px;
             margin-bottom: 12px;
             color: rgba(255,255,255,0.9);
             font-weight: 600;
@@ -198,12 +276,34 @@
         
         .countdown-timer {
             font-size: 24px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--warning);
-            font-family: 'Courier New', monospace;
+            font-family: 'Orbitron', sans-serif;
             letter-spacing: 1px;
-            margin: 5px 0;
-            text-shadow: 0 0 8px rgba(255, 158, 0, 0.3);
+            margin: 10px 0;
+            text-shadow: 0 0 10px rgba(255, 158, 0, 0.5);
+            display: inline-flex;
+            gap: 8px;
+        }
+        
+        .countdown-timer span {
+            padding: 6px 8px;
+            border-radius: 6px;
+            min-width: 24px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+        }
+        
+        .countdown-timer span::after {
+            content: ':';
+            position: absolute;
+            right: -6px;
+            color: var(--warning);
+        }
+        
+        .countdown-timer span:last-child::after {
+            display: none;
         }
         
         .security-badge {
@@ -239,7 +339,7 @@
         <div class="date-display" id="currentDate">Loading date...</div>
         
         <div class="description">
-            Complete your coin targets before month-end to qualify for your chatroom group salary payment.
+            Complete your coin targets before month-end to qualify for your chatroom group salary payment. Ensure all requirements are met before the deadline to receive your full compensation.
         </div>
         
         <div class="agency">🔒 Secure Message From Agency</div>
@@ -281,8 +381,14 @@
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
-            document.getElementById('countdown').textContent = 
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            // Create formatted time with separate elements
+            const timer = document.getElementById('countdown');
+            timer.innerHTML = `
+                <span>${days}d</span>
+                <span>${hours}h</span>
+                <span>${minutes}m</span>
+                <span>${seconds}s</span>
+            `;
         }
         
         updateCurrentDate();
