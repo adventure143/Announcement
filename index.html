@@ -29,12 +29,16 @@
             justify-content: center;
             align-items: center;
             color: var(--dark);
-            touch-action: manipulation; /* Disables pinch-zoom */
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         
         .alert-container {
             background: white;
-            border-radius: 0; /* Square corners */
+            border-radius: 0;
             padding: 30px;
             box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.15);
             width: 90%;
@@ -127,7 +131,7 @@
         .description {
             background-color: rgba(67, 97, 238, 0.05);
             padding: 18px;
-            border-radius: 12px; /* Rounded description box */
+            border-radius: 12px;
             margin: 0 auto 25px auto;
             line-height: 1.6;
             border-left: 4px solid var(--primary);
@@ -249,6 +253,11 @@
     </div>
 
     <script>
+        // Prevent context menu on long press
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
         // Display current date (without time)
         function updateCurrentDate() {
             const now = new Date();
