@@ -3,32 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KS Agency ShareChat</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Coin Target Alert</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .alert-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .title {
+            color: #e74c3c;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .date-display {
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #7f8c8d;
+        }
+        .description {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .countdown {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .countdown-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #ecf0f1;
+        }
+        .countdown-timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+        .agency {
+            text-align: right;
+            font-style: italic;
+            margin-top: 15px;
+            color: #7f8c8d;
+        }
+    </style>
 </head>
 <body>
-    <div class="logo-container">
-        <img src="https://i.postimg.cc/NG7ZfLZN/2-KS-Agency-Logo-Round-Cut.png" alt="KS Agency Logo" class="logo">
+    <div class="alert-container">
+        <div class="title">Coin Target Alert</div>
+        <div class="date-display" id="currentDate">Loading date...</div>
+        
+        <div class="description">
+            Please Complete Your Target Coins Before Month End<br><br>
+            Then You Can Get Your Chatroom Group Salary
+        </div>
+        
+        <div class="countdown">
+            <div class="countdown-title">Time remaining until April 1:</div>
+            <div class="countdown-timer" id="countdown"></div>
+        </div>
+        
+        <div class="agency">From Agency</div>
     </div>
 
-    <div class="title">
-        <h1>KS Agency ShareChat</h1>
-        <h4>All Languages Gift Chatroom Available</h4>
-        <h5>All Languages FriendZone Available</h5>
-    </div>
-
-    <div class="button-container">
-        <a href="https://youtu.be/sh6qdB7tq5g?si=AUs0aTaSH0qF06ec" class="button">Apply Gift Box ( Add Agency )</a><br><br>
-    </div>
-
-    <div class="contact-container">
-        <button onclick="openContactPage()" class="contact-button">Contact Details</button>
-    </div>
-
-    <footer>
-        <p>&copy; KS Agency All Rights Reserved | <span id="currentYear"></span></p>
-    </footer>
-
-    <script src="script.js"></script>
+    <script>
+        // Display current date
+        function updateCurrentDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
+        }
+        
+        // Countdown to April 1
+        function updateCountdown() {
+            const now = new Date();
+            let targetDate = new Date(now.getFullYear(), 3, 1); // April is month 3 (0-indexed)
+            
+            // If we're already in April, set target to May 1 (for demonstration)
+            if (now.getMonth() >= 3) {
+                targetDate = new Date(now.getFullYear() + 1, 3, 1);
+            }
+            
+            const diff = targetDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').textContent = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+        
+        // Update both date and countdown immediately
+        updateCurrentDate();
+        updateCountdown();
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+    </script>
 </body>
 </html>
