@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Month End Coin Target Alert</title>
     <style>
         :root {
@@ -12,7 +12,7 @@
             --dark: #1A1A2E;
             --light: #F8F9FA;
             --warning: #FF9E00;
-            --success: #00AA00; /* Pure green color */
+            --success: #00AA00;
             --teal: #4CC9F0;
             --purple: #7209B7;
         }
@@ -29,11 +29,12 @@
             justify-content: center;
             align-items: center;
             color: var(--dark);
+            touch-action: manipulation; /* Disables pinch-zoom */
         }
         
         .alert-container {
             background: white;
-            border-radius: 0; /* Removed corner curves */
+            border-radius: 0; /* Square corners */
             padding: 30px;
             box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.15);
             width: 90%;
@@ -41,44 +42,39 @@
             position: relative;
             overflow: hidden;
             text-align: center;
-            border: 1px solid rgba(0,0,0,0.1); /* Added subtle border */
+            border: 1px solid rgba(0,0,0,0.1);
         }
         
-        .multi-color-border {
+        .border-animation {
             position: absolute;
             left: 0;
             width: 100%;
             height: 6px;
             background: linear-gradient(
                 90deg, 
-                var(--primary) 0%, 
-                var(--teal) 20%,
-                var(--accent) 40%,
-                var(--warning) 60%,
-                var(--purple) 80%,
-                var(--primary) 100%
+                var(--primary),
+                var(--teal),
+                var(--accent),
+                var(--warning),
+                var(--purple),
+                var(--primary)
             );
-            background-size: 300% 100%;
+            background-size: 500% 100%;
         }
         
         .border-top {
             top: 0;
-            animation: gradientFlowRight 6s linear infinite;
+            animation: gradientFlow 6s linear infinite;
         }
         
         .border-bottom {
             bottom: 0;
-            animation: gradientFlowLeft 6s linear infinite;
+            animation: gradientFlow 6s linear infinite reverse;
         }
         
-        @keyframes gradientFlowRight {
+        @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
-        }
-        
-        @keyframes gradientFlowLeft {
-            0% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
         
         .title-container {
@@ -123,6 +119,7 @@
             font-weight: 500;
             background: rgba(67, 97, 238, 0.08);
             padding: 8px 16px;
+            border-radius: 50px;
             display: inline-block;
             border: 1px solid rgba(67, 97, 238, 0.1);
         }
@@ -130,6 +127,7 @@
         .description {
             background-color: rgba(67, 97, 238, 0.05);
             padding: 18px;
+            border-radius: 12px; /* Rounded description box */
             margin: 0 auto 25px auto;
             line-height: 1.6;
             border-left: 4px solid var(--primary);
@@ -154,6 +152,7 @@
             background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
             color: white;
             padding: 18px;
+            border-radius: 12px;
             margin: 0 auto;
             max-width: 85%;
             position: relative;
@@ -210,13 +209,14 @@
             align-items: center;
             margin-top: 20px;
             padding: 6px 12px;
+            border-radius: 50px;
             background: rgba(113, 128, 150, 0.1);
             gap: 6px;
         }
         
         .security-badge::before {
             content: '✓';
-            color: var(--success); /* Pure green tick */
+            color: var(--success);
             font-weight: bold;
             font-size: 14px;
         }
@@ -224,8 +224,8 @@
 </head>
 <body>
     <div class="alert-container">
-        <div class="multi-color-border border-top"></div>
-        <div class="multi-color-border border-bottom"></div>
+        <div class="border-animation border-top"></div>
+        <div class="border-animation border-bottom"></div>
         
         <div class="title-container">
             <span class="title-line1">Month End</span>
