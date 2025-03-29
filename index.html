@@ -12,7 +12,7 @@
             --dark: #1A1A2E;
             --light: #F8F9FA;
             --warning: #FF9E00;
-            --success: #4CC9F0;
+            --success: #90EE90;
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
@@ -41,29 +41,34 @@
             text-align: center;
         }
         
-        .alert-container::before,
-        .alert-container::after {
-            content: '';
+        .border-animation {
             position: absolute;
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(90deg, 
+            background: linear-gradient(
+                90deg, 
                 var(--primary) 0%, 
-                var(--accent) 50%, 
-                var(--warning) 100%);
+                var(--accent) 25%,
+                var(--warning) 50%,
+                var(--accent) 75%,
+                var(--primary) 100%
+            );
+            background-size: 200% 100%;
+            animation: gradientFlow 4s linear infinite;
         }
         
-        .alert-container::before {
+        .border-top {
             top: 0;
         }
         
-        .alert-container::after {
+        .border-bottom {
             bottom: 0;
-            background: linear-gradient(90deg, 
-                var(--warning) 0%, 
-                var(--accent) 50%, 
-                var(--primary) 100%);
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         
         .title-container {
@@ -121,8 +126,10 @@
             margin: 0 auto 25px auto;
             line-height: 1.6;
             border-left: 4px solid var(--primary);
+            border-right: 4px solid var(--primary);
             font-size: 15px;
             max-width: 90%;
+            position: relative;
         }
         
         .agency {
@@ -150,10 +157,34 @@
         
         .countdown-title {
             font-size: 14px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: rgba(255,255,255,0.9);
             font-weight: 600;
             letter-spacing: 0.5px;
+            position: relative;
+            display: inline-block;
+            padding: 0 15px;
+        }
+        
+        .countdown-title::before,
+        .countdown-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--warning) 50%,
+                transparent 100%);
+        }
+        
+        .countdown-title::before {
+            right: 100%;
+        }
+        
+        .countdown-title::after {
+            left: 100%;
         }
         
         .countdown-timer {
@@ -163,6 +194,7 @@
             font-family: 'Courier New', monospace;
             letter-spacing: 1px;
             margin: 5px 0;
+            text-shadow: 0 0 8px rgba(255, 158, 0, 0.3);
         }
         
         .security-badge {
@@ -181,11 +213,15 @@
             content: '✓';
             color: var(--success);
             font-weight: bold;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="alert-container">
+        <div class="border-animation border-top"></div>
+        <div class="border-animation border-bottom"></div>
+        
         <div class="title-container">
             <span class="title-line1">Month End</span>
             <span class="title-line2">Coin Target Alert</span>
@@ -200,7 +236,7 @@
         <div class="agency">🔒 Secure Message From Agency</div>
         
         <div class="countdown">
-            <div class="countdown-title">Time Remaining Until April 1</div>
+            <div class="countdown-title">TIME REMAINING UNTIL APRIL 1</div>
             <div class="countdown-timer" id="countdown"></div>
         </div>
         
