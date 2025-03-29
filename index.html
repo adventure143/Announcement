@@ -6,62 +6,75 @@
     <title>Month End Coin Target Alert</title>
     <style>
         :root {
-            --primary: #2A5CAA;
-            --secondary: #4CAF50;
-            --accent: #FF6D00;
-            --dark: #1A237E;
-            --light: #E8EAF6;
-            --warning: #FFC107;
+            --primary: #4361EE;
+            --secondary: #3A0CA3;
+            --accent: #F72585;
+            --dark: #1A1A2E;
+            --light: #F8F9FA;
+            --warning: #FF9E00;
+            --success: #4CC9F0;
         }
         
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        
         body {
-            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E0 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #333;
+            color: var(--dark);
         }
         
         .alert-container {
             background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
             width: 90%;
             max-width: 500px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(42, 92, 170, 0.2);
+            border: none;
             text-align: center;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
-        .security-strip {
+        .alert-container::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            height: 8px;
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, 
+                var(--accent) 50%, 
+                var(--warning) 100%);
         }
         
-        .security-strip-bottom {
+        .alert-container::after {
+            content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 50%, var(--primary) 100%);
+            height: 8px;
+            background: linear-gradient(90deg, 
+                var(--warning) 0%, 
+                var(--accent) 50%, 
+                var(--primary) 100%);
         }
         
         .title-container {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             position: relative;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
         }
         
         .title-container::after {
@@ -70,111 +83,174 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
+            width: 120px;
+            height: 4px;
             background: var(--accent);
-            border-radius: 3px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(247, 37, 133, 0.3);
         }
         
         .title-line1 {
             display: block;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
         
         .title-line2 {
             display: block;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 800;
             color: var(--dark);
             background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .date-display {
             text-align: center;
-            font-size: 15px;
-            margin: 0 auto 25px auto;
-            color: #666;
+            font-size: 16px;
+            margin: 0 auto 30px auto;
+            color: #4A5568;
             font-weight: 500;
-            background: rgba(42, 92, 170, 0.08);
-            padding: 8px 15px;
-            border-radius: 20px;
+            background: rgba(67, 97, 238, 0.08);
+            padding: 10px 20px;
+            border-radius: 50px;
             display: inline-block;
-            border: 1px solid rgba(42, 92, 170, 0.1);
-            max-width: 80%;
+            border: 1px solid rgba(67, 97, 238, 0.1);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
         
         .description {
-            background-color: rgba(42, 92, 170, 0.05);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 0 auto 25px auto;
-            line-height: 1.6;
-            border-left: 4px solid var(--primary);
-            font-size: 15px;
-            color: #444;
+            background-color: rgba(67, 97, 238, 0.05);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 0 auto 30px auto;
+            line-height: 1.7;
+            border-left: 5px solid var(--primary);
+            font-size: 16px;
+            color: #2D3748;
             text-align: center;
             max-width: 90%;
-        }
-        
-        .agency {
-            font-weight: 700;
-            margin: 25px auto 15px auto;
-            color: var(--primary);
-            font-size: 16px;
-            letter-spacing: 0.3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .countdown {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 16px;
-            box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
+            box-shadow: inset 0 0 10px rgba(67, 97, 238, 0.05);
             position: relative;
             overflow: hidden;
-            margin: 0 auto;
-            max-width: 90%;
         }
         
-        .countdown::before {
+        .description::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            animation: rotate 15s linear infinite;
+            background: radial-gradient(circle, rgba(67, 97, 238, 0.05) 0%, rgba(67, 97, 238, 0) 70%);
+            animation: rotate 20s linear infinite;
+            opacity: 0.5;
+        }
+        
+        .agency {
+            font-weight: 700;
+            margin: 30px auto 20px auto;
+            color: var(--primary);
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(67, 97, 238, 0.1);
+            padding: 12px 24px;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            max-width: fit-content;
+        }
+        
+        .agency::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+            animation: shine 3s infinite;
+        }
+        
+        .countdown {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 16px;
+            box-shadow: 0 10px 20px rgba(26, 35, 126, 0.2);
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+        
+        .countdown::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+            z-index: -1;
         }
         
         .countdown-title {
-            font-size: 15px;
-            margin-bottom: 12px;
+            font-size: 16px;
+            margin-bottom: 15px;
             color: rgba(255,255,255,0.9);
-            font-weight: 500;
+            font-weight: 600;
             position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .countdown-timer {
-            font-size: 26px;
-            font-weight: 700;
+            font-size: 32px;
+            font-weight: 800;
             color: var(--warning);
             font-family: 'Courier New', monospace;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             position: relative;
-            text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+            text-shadow: 0 0 10px rgba(255, 158, 0, 0.4);
+            margin: 10px 0;
+        }
+        
+        .security-badge {
+            position: relative;
+            font-size: 13px;
+            color: #718096;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: rgba(113, 128, 150, 0.1);
+            gap: 8px;
+        }
+        
+        .security-badge::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            font-size: 16px;
         }
         
         @keyframes rotate {
@@ -182,48 +258,58 @@
             to { transform: rotate(360deg); }
         }
         
-        .security-badge {
-            position: relative;
-            font-size: 12px;
-            color: #666;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
         
-        .security-badge::before {
-            content: '✓';
-            color: var(--secondary);
-            font-weight: bold;
-            margin-right: 5px;
+        .coin-icon {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--warning) 0%, rgba(255, 158, 0, 0) 70%);
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .coin-1 {
+            top: -20px;
+            right: -20px;
+        }
+        
+        .coin-2 {
+            bottom: -30px;
+            left: -30px;
+            width: 120px;
+            height: 120px;
         }
     </style>
 </head>
 <body>
     <div class="alert-container">
-        <div class="security-strip"></div>
-        <div class="security-strip-bottom"></div>
+        <div class="coin-icon coin-1"></div>
+        <div class="coin-icon coin-2"></div>
         
         <div class="title-container">
-            <span class="title-line1">MONTH END</span>
-            <span class="title-line2">COIN TARGET ALERT</span>
+            <span class="title-line1">Month End</span>
+            <span class="title-line2">Coin Target Alert</span>
         </div>
         
         <div class="date-display" id="currentDate">Loading date...</div>
         
         <div class="description">
-            Please complete your target coins before month end to qualify for your chatroom group salary payment. Ensure all requirements are met before the deadline.
+            Complete your coin targets before month-end to qualify for your chatroom group salary payment. All requirements must be met before the deadline.
         </div>
         
-        <div class="agency">🔒 SECURE MESSAGE FROM AGENCY</div>
+        <div class="agency">🔒 Secure Message From Agency</div>
         
         <div class="countdown">
-            <div class="countdown-title">TIME REMAINING UNTIL APRIL 1:</div>
+            <div class="countdown-title">Time Remaining Until April 1</div>
             <div class="countdown-timer" id="countdown"></div>
         </div>
         
-        <div class="security-badge">Secure Verification</div>
+        <div class="security-badge">Secured Verification</div>
     </div>
 
     <script>
