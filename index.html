@@ -128,18 +128,10 @@
             color: var(--primary);
             font-size: 16px;
             letter-spacing: 0.3px;
-            position: relative;
-            display: inline-block;
-            padding-right: 25px;
-        }
-        
-        .agency::after {
-            content: '🔒';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .countdown {
@@ -224,7 +216,7 @@
             Please complete your target coins before month end to qualify for your chatroom group salary payment. Ensure all requirements are met before the deadline.
         </div>
         
-        <div class="agency">SECURE MESSAGE FROM AGENCY</div>
+        <div class="agency">🔒 SECURE MESSAGE FROM AGENCY</div>
         
         <div class="countdown">
             <div class="countdown-title">TIME REMAINING UNTIL APRIL 1:</div>
@@ -235,10 +227,10 @@
     </div>
 
     <script>
-        // Display current date
+        // Display current date (without time)
         function updateCurrentDate() {
             const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
         }
         
