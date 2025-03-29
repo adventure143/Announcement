@@ -12,7 +12,9 @@
             --dark: #1A1A2E;
             --light: #F8F9FA;
             --warning: #FF9E00;
-            --success: #90EE90;
+            --success: #00AA00; /* Pure green color */
+            --teal: #4CC9F0;
+            --purple: #7209B7;
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
@@ -31,7 +33,7 @@
         
         .alert-container {
             background: white;
-            border-radius: 20px;
+            border-radius: 0; /* Removed corner curves */
             padding: 30px;
             box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.15);
             width: 90%;
@@ -39,36 +41,44 @@
             position: relative;
             overflow: hidden;
             text-align: center;
+            border: 1px solid rgba(0,0,0,0.1); /* Added subtle border */
         }
         
-        .border-animation {
+        .multi-color-border {
             position: absolute;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 6px;
             background: linear-gradient(
                 90deg, 
                 var(--primary) 0%, 
-                var(--accent) 25%,
-                var(--warning) 50%,
-                var(--accent) 75%,
+                var(--teal) 20%,
+                var(--accent) 40%,
+                var(--warning) 60%,
+                var(--purple) 80%,
                 var(--primary) 100%
             );
-            background-size: 200% 100%;
-            animation: gradientFlow 4s linear infinite;
+            background-size: 300% 100%;
         }
         
         .border-top {
             top: 0;
+            animation: gradientFlowRight 6s linear infinite;
         }
         
         .border-bottom {
             bottom: 0;
+            animation: gradientFlowLeft 6s linear infinite;
         }
         
-        @keyframes gradientFlow {
+        @keyframes gradientFlowRight {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
+        }
+        
+        @keyframes gradientFlowLeft {
+            0% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .title-container {
@@ -86,7 +96,6 @@
             width: 80px;
             height: 3px;
             background: var(--accent);
-            border-radius: 3px;
         }
         
         .title-line1 {
@@ -114,7 +123,6 @@
             font-weight: 500;
             background: rgba(67, 97, 238, 0.08);
             padding: 8px 16px;
-            border-radius: 50px;
             display: inline-block;
             border: 1px solid rgba(67, 97, 238, 0.1);
         }
@@ -122,7 +130,6 @@
         .description {
             background-color: rgba(67, 97, 238, 0.05);
             padding: 18px;
-            border-radius: 12px;
             margin: 0 auto 25px auto;
             line-height: 1.6;
             border-left: 4px solid var(--primary);
@@ -147,7 +154,6 @@
             background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
             color: white;
             padding: 18px;
-            border-radius: 12px;
             margin: 0 auto;
             max-width: 85%;
             position: relative;
@@ -204,14 +210,13 @@
             align-items: center;
             margin-top: 20px;
             padding: 6px 12px;
-            border-radius: 50px;
             background: rgba(113, 128, 150, 0.1);
             gap: 6px;
         }
         
         .security-badge::before {
             content: '✓';
-            color: var(--success);
+            color: var(--success); /* Pure green tick */
             font-weight: bold;
             font-size: 14px;
         }
@@ -219,8 +224,8 @@
 </head>
 <body>
     <div class="alert-container">
-        <div class="border-animation border-top"></div>
-        <div class="border-animation border-bottom"></div>
+        <div class="multi-color-border border-top"></div>
+        <div class="multi-color-border border-bottom"></div>
         
         <div class="title-container">
             <span class="title-line1">Month End</span>
