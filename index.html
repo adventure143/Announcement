@@ -19,6 +19,7 @@
         
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600&display=swap');
         
         body {
             font-family: 'Poppins', sans-serif;
@@ -204,12 +205,34 @@
         
         .countdown-timer {
             font-size: 24px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--warning);
-            font-family: 'Courier New', monospace;
+            font-family: 'Orbitron', sans-serif;
             letter-spacing: 1px;
-            margin: 5px 0;
-            text-shadow: 0 0 8px rgba(255, 158, 0, 0.3);
+            margin: 10px 0;
+            text-shadow: 0 0 10px rgba(255, 158, 0, 0.5);
+            display: inline-flex;
+            gap: 8px;
+        }
+        
+        .countdown-timer span {
+            padding: 6px 8px;
+            border-radius: 6px;
+            min-width: 24px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+        }
+        
+        .countdown-timer span::after {
+            content: ':';
+            position: absolute;
+            right: -6px;
+            color: var(--warning);
+        }
+        
+        .countdown-timer span:last-child::after {
+            display: none;
         }
         
         .security-badge {
@@ -245,7 +268,7 @@
         <div class="date-display" id="currentDate">Loading date...</div>
         
         <div class="description">
-            Complete your coin targets before month-end to qualify for your chatroom group salary payment. Ensure all requirements are met before the deadline to receive your full compensation.
+            Complete your coin targets before month-end to qualify for your group salary payment. Ensure all requirements are met before the deadline.
         </div>
         
         <div class="agency">🔒 Secure Message From Agency</div>
@@ -287,8 +310,14 @@
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
-            document.getElementById('countdown').textContent = 
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            // Create formatted time with separate elements
+            const timer = document.getElementById('countdown');
+            timer.innerHTML = `
+                <span>${days}d</span>
+                <span>${hours}h</span>
+                <span>${minutes}m</span>
+                <span>${seconds}s</span>
+            `;
         }
         
         updateCurrentDate();
