@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>Month End Coin Target Alert</title>
     <style>
         :root {
@@ -31,11 +31,16 @@
             justify-content: center;
             align-items: center;
             color: var(--dark);
-            touch-action: manipulation;
+            touch-action: none; /* Disable all touch gestures */
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            overflow: hidden; /* Prevent scrolling */
+            position: fixed; /* Lock viewport */
+            width: 100%;
+            height: 100%;
+            -webkit-text-size-adjust: 100%; /* Prevent font scaling */
         }
         
         .alert-container {
@@ -49,6 +54,8 @@
             overflow: hidden;
             text-align: center;
             border: 1px solid rgba(0,0,0,0.1);
+            transform: translateZ(0); /* Hardware acceleration */
+            backface-visibility: hidden; /* Prevent flickering */
         }
         
         .border-animation {
@@ -284,10 +291,25 @@
     </div>
 
     <script>
+        // Prevent all default touch behaviors
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+        
         // Prevent context menu on long press
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
+
+        // Prevent double-tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
 
         // Display current date (without time)
         function updateCurrentDate() {
