@@ -6,62 +6,75 @@
     <title>Month End Coin Target Alert</title>
     <style>
         :root {
-            --primary: #2A5CAA;
-            --secondary: #4CAF50;
-            --accent: #FF6D00;
-            --dark: #1A237E;
-            --light: #E8EAF6;
-            --warning: #FFC107;
+            --primary: #4361EE;
+            --secondary: #3A0CA3;
+            --accent: #F72585;
+            --dark: #1A1A2E;
+            --light: #F8F9FA;
+            --warning: #FF9E00;
+            --success: #90EE90;
         }
         
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        
         body {
-            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E0 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #333;
+            color: var(--dark);
         }
         
         .alert-container {
             background: white;
-            border-radius: 12px;
+            border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.15);
             width: 90%;
-            max-width: 500px;
+            max-width: 450px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(42, 92, 170, 0.2);
             text-align: center;
         }
         
-        .security-strip {
+        .border-animation {
             position: absolute;
-            top: 0;
             left: 0;
             width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            height: 5px;
+            background: linear-gradient(
+                90deg, 
+                var(--primary) 0%, 
+                var(--accent) 25%,
+                var(--warning) 50%,
+                var(--accent) 75%,
+                var(--primary) 100%
+            );
+            background-size: 200% 100%;
+            animation: gradientFlow 4s linear infinite;
         }
         
-        .security-strip-bottom {
-            position: absolute;
+        .border-top {
+            top: 0;
+        }
+        
+        .border-bottom {
             bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 50%, var(--primary) 100%);
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         
         .title-container {
-            text-align: center;
-            margin-bottom: 25px;
-            position: relative;
+            margin-bottom: 20px;
             padding-bottom: 15px;
+            position: relative;
         }
         
         .title-container::after {
@@ -70,7 +83,7 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 80px;
             height: 3px;
             background: var(--accent);
             border-radius: 3px;
@@ -78,16 +91,15 @@
         
         .title-line1 {
             display: block;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 5px;
-            letter-spacing: 0.5px;
         }
         
         .title-line2 {
             display: block;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             color: var(--dark);
             background: linear-gradient(to right, var(--primary), var(--secondary));
@@ -96,38 +108,35 @@
         }
         
         .date-display {
-            text-align: center;
-            font-size: 15px;
-            margin: 0 auto 25px auto;
-            color: #666;
+            font-size: 14px;
+            margin: 0 auto 20px auto;
+            color: #4A5568;
             font-weight: 500;
-            background: rgba(42, 92, 170, 0.08);
-            padding: 8px 15px;
-            border-radius: 20px;
+            background: rgba(67, 97, 238, 0.08);
+            padding: 8px 16px;
+            border-radius: 50px;
             display: inline-block;
-            border: 1px solid rgba(42, 92, 170, 0.1);
-            max-width: 80%;
+            border: 1px solid rgba(67, 97, 238, 0.1);
         }
         
         .description {
-            background-color: rgba(42, 92, 170, 0.05);
-            padding: 20px;
-            border-radius: 10px;
+            background-color: rgba(67, 97, 238, 0.05);
+            padding: 18px;
+            border-radius: 12px;
             margin: 0 auto 25px auto;
             line-height: 1.6;
             border-left: 4px solid var(--primary);
+            border-right: 4px solid var(--primary);
             font-size: 15px;
-            color: #444;
-            text-align: center;
             max-width: 90%;
+            position: relative;
         }
         
         .agency {
             font-weight: 700;
-            margin: 25px auto 15px auto;
+            margin: 20px auto;
             color: var(--primary);
             font-size: 16px;
-            letter-spacing: 0.3px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -135,95 +144,103 @@
         }
         
         .countdown {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 16px;
-            box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
+            padding: 18px;
+            border-radius: 12px;
+            margin: 0 auto;
+            max-width: 85%;
             position: relative;
             overflow: hidden;
-            margin: 0 auto;
-            max-width: 90%;
-        }
-        
-        .countdown::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            animation: rotate 15s linear infinite;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .countdown-title {
-            font-size: 15px;
+            font-size: 14px;
             margin-bottom: 12px;
             color: rgba(255,255,255,0.9);
-            font-weight: 500;
+            font-weight: 600;
+            letter-spacing: 0.5px;
             position: relative;
+            display: inline-block;
+            padding: 0 15px;
+        }
+        
+        .countdown-title::before,
+        .countdown-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--warning) 50%,
+                transparent 100%);
+        }
+        
+        .countdown-title::before {
+            right: 100%;
+        }
+        
+        .countdown-title::after {
+            left: 100%;
         }
         
         .countdown-timer {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--warning);
             font-family: 'Courier New', monospace;
             letter-spacing: 1px;
-            position: relative;
-            text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            margin: 5px 0;
+            text-shadow: 0 0 8px rgba(255, 158, 0, 0.3);
         }
         
         .security-badge {
-            position: relative;
             font-size: 12px;
-            color: #666;
-            display: flex;
+            color: #718096;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
             margin-top: 20px;
+            padding: 6px 12px;
+            border-radius: 50px;
+            background: rgba(113, 128, 150, 0.1);
+            gap: 6px;
         }
         
         .security-badge::before {
             content: '✓';
-            color: var(--secondary);
+            color: var(--success);
             font-weight: bold;
-            margin-right: 5px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="alert-container">
-        <div class="security-strip"></div>
-        <div class="security-strip-bottom"></div>
+        <div class="border-animation border-top"></div>
+        <div class="border-animation border-bottom"></div>
         
         <div class="title-container">
-            <span class="title-line1">MONTH END</span>
-            <span class="title-line2">COIN TARGET ALERT</span>
+            <span class="title-line1">Month End</span>
+            <span class="title-line2">Coin Target Alert</span>
         </div>
         
         <div class="date-display" id="currentDate">Loading date...</div>
         
         <div class="description">
-            Please complete your target coins before month end to qualify for your chatroom group salary payment. Ensure all requirements are met before the deadline.
+            Complete your coin targets before month-end to qualify for your chatroom group salary payment.
         </div>
         
-        <div class="agency">🔒 SECURE MESSAGE FROM AGENCY</div>
+        <div class="agency">🔒 Secure Message From Agency</div>
         
         <div class="countdown">
-            <div class="countdown-title">TIME REMAINING UNTIL APRIL 1:</div>
+            <div class="countdown-title">TIME REMAINING UNTIL APRIL 1</div>
             <div class="countdown-timer" id="countdown"></div>
         </div>
         
-        <div class="security-badge">Secure Verification</div>
+        <div class="security-badge">Secured Verification</div>
     </div>
 
     <script>
@@ -239,7 +256,6 @@
             const now = new Date();
             let targetDate = new Date(now.getFullYear(), 3, 1); // April is month 3 (0-indexed)
             
-            // If we're already in April, set target to next year
             if (now.getMonth() >= 3) {
                 targetDate = new Date(now.getFullYear() + 1, 3, 1);
             }
@@ -255,11 +271,8 @@
                 `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
         
-        // Update both date and countdown immediately
         updateCurrentDate();
         updateCountdown();
-        
-        // Update countdown every second
         setInterval(updateCountdown, 1000);
     </script>
 </body>
