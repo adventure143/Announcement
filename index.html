@@ -11,9 +11,17 @@
       background: #e0e5ec;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #222;
+      justify-content: center;
+    }
+
+    .website-container {
+      border: 3px solid #2B97FF;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
+      box-sizing: border-box;
+      background: #e0e5ec;
     }
 
     .title-box {
@@ -23,7 +31,6 @@
       padding: 15px 30px;
       margin-bottom: 25px;
       text-align: center;
-      max-width: 90%;
     }
 
     .title-box h1 {
@@ -38,9 +45,7 @@
       border-radius: 20px;
       box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
       padding: 15px;
-      width: 100%;
-      max-width: 500px;
-      box-sizing: border-box;
+      margin-bottom: 25px;
     }
 
     .neumorphic-box img {
@@ -51,15 +56,11 @@
     }
 
     .countdown-container {
-      margin-top: 25px;
       padding: 20px;
       background: #e0e5ec;
       border-radius: 15px;
       box-shadow: inset 5px 5px 10px #b8c6db, inset -5px -5px 10px #ffffff;
       text-align: center;
-      width: 100%;
-      max-width: 400px;
-      box-sizing: border-box;
     }
 
     .countdown-title {
@@ -82,9 +83,7 @@
       box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
       padding: 40px 30px;
       text-align: center;
-      max-width: 400px;
       animation: fadeIn 1.5s ease-in-out;
-      margin-top: 25px;
     }
 
     .offer-ended-icon {
@@ -110,7 +109,7 @@
       }
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       .title-box h1 {
         font-size: 1.5rem;
       }
@@ -121,14 +120,6 @@
 
       .countdown-time {
         font-size: 1.6rem;
-      }
-
-      .neumorphic-box {
-        padding: 10px;
-      }
-
-      .countdown-container {
-        padding: 15px;
       }
 
       .offer-ended-text {
@@ -142,19 +133,19 @@
   </style>
 </head>
 <body>
+  <div class="website-container">
+    <div class="title-box">
+      <h1>ShareChat Today Offers</h1>
+    </div>
 
-  <div class="title-box">
-    <h1>ShareChat Today Offers</h1>
-  </div>
+    <div class="neumorphic-box">
+      <img src="https://i.postimg.cc/nLmY8Tbr/2x-3x-Offer.jpg" alt="2x 3x Offer" />
+    </div>
 
-  <div class="neumorphic-box">
-    <img src="https://i.postimg.cc/nLmY8Tbr/2x-3x-Offer.jpg" alt="2x 3x Offer" />
-  </div>
-
-  <div class="countdown-container" id="countdownBox">
-    <div class="countdown-title">⏰ Time Left Until
-      Today Night 12:00 AM</div>
-    <div class="countdown-time" id="countdown">00:00:00</div>
+    <div class="countdown-container" id="countdownBox">
+      <div class="countdown-title">⏰ Time Left Until Night 12:00 AM</div>
+      <div class="countdown-time" id="countdown">00:00:00</div>
+    </div>
   </div>
 
   <script>
@@ -166,7 +157,6 @@
       const diff = midnight - now;
 
       if (diff <= 0) {
-        // Replace countdown with Offers Ended animation box
         document.getElementById("countdownBox").innerHTML = `
           <div class="offer-ended-box">
             <div class="offer-ended-icon">🛑</div>
@@ -186,6 +176,5 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
   </script>
-
 </body>
 </html>
