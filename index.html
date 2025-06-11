@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShareChat Today Offers</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #e0e5ec;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #222;
+    }
+
+    .title-box {
+      background: #e0e5ec;
+      border-radius: 15px;
+      box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
+      padding: 15px 30px;
+      margin-bottom: 25px;
+      text-align: center;
+      max-width: 90%;
+    }
+
+    .title-box h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0;
+      color: #2a2a2a;
+    }
+
+    .neumorphic-box {
+      background: #e0e5ec;
+      border-radius: 20px;
+      box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
+      padding: 15px;
+      width: 100%;
+      max-width: 500px;
+      box-sizing: border-box;
+    }
+
+    .neumorphic-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 15px;
+    }
+
+    .countdown-container {
+      margin-top: 25px;
+      padding: 20px;
+      background: #e0e5ec;
+      border-radius: 15px;
+      box-shadow: inset 5px 5px 10px #b8c6db, inset -5px -5px 10px #ffffff;
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+
+    .countdown-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .countdown-time {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #222;
+    }
+
+    .offer-ended-box {
+      background: #e0e5ec;
+      border-radius: 25px;
+      box-shadow: 8px 8px 15px #a3b1c6, -8px -8px 15px #ffffff;
+      padding: 40px 30px;
+      text-align: center;
+      max-width: 400px;
+      animation: fadeIn 1.5s ease-in-out;
+      margin-top: 25px;
+    }
+
+    .offer-ended-icon {
+      font-size: 3.5rem;
+      color: #d10000;
+      margin-bottom: 10px;
+    }
+
+    .offer-ended-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #a33;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .title-box h1 {
+        font-size: 1.5rem;
+      }
+
+      .countdown-title {
+        font-size: 1.2rem;
+      }
+
+      .countdown-time {
+        font-size: 1.6rem;
+      }
+
+      .neumorphic-box {
+        padding: 10px;
+      }
+
+      .countdown-container {
+        padding: 15px;
+      }
+
+      .offer-ended-text {
+        font-size: 1.5rem;
+      }
+
+      .offer-ended-icon {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="title-box">
+    <h1>ShareChat Today Offers</h1>
+  </div>
+
+  <div class="neumorphic-box">
+    <img src="https://i.postimg.cc/nLmY8Tbr/2x-3x-Offer.jpg" alt="2x 3x Offer" />
+  </div>
+
+  <div class="countdown-container" id="countdownBox">
+    <div class="countdown-title">⏰ Time Left Until Night 12:00 AM</div>
+    <div class="countdown-time" id="countdown">00:00:00</div>
+  </div>
+
+  <script>
+    function updateCountdown() {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(24, 0, 0, 0);
+
+      const diff = midnight - now;
+
+      if (diff <= 0) {
+        // Replace countdown with Offers Ended animation box
+        document.getElementById("countdownBox").innerHTML = `
+          <div class="offer-ended-box">
+            <div class="offer-ended-icon">🛑</div>
+            <div class="offer-ended-text">Offers Ended</div>
+          </div>
+        `;
+        return;
+      }
+
+      const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+
+      document.getElementById("countdown").innerText = `${hours}:${minutes}:${seconds}`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+
+</body>
+</html>
